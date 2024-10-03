@@ -320,7 +320,7 @@ function showingQuestions([checked, tgs, diff, com]) {
         </td>
         <td class="h-9">${que.name}</td>
           <td class="h-9">
-            <a href=${que.solution}>
+            <a href=${que.solution} target="_blank">
               <img src="visit.svg" class="h-6 w-6 mx-auto"/>
             </a>
           </td>
@@ -382,6 +382,7 @@ function displayAllTags() {
 // RESET BUTTON
 
 function resetValues() {
+  if (!window.confirm("Do you really want to reset all the history!")) return;
   tagsSelector.value = "All";
   diffSelector.value = "All";
   companiesSelector.value = "All";
