@@ -1,0 +1,8 @@
+.pie::after {
+  content: var(--after-content); /* Use the CSS variable set by JavaScript */
+}
+
+/* global css */
+input[type="checkbox"] {
+  cursor: pointer;
+}

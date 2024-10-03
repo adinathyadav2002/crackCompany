@@ -145,6 +145,17 @@ const questions = [
   },
 ];
 
+// Data for the donut chart
+const data = {
+  labels: ["Red", "White"],
+  datasets: [
+    {
+      data: [0, 100], // Percentages or values
+      backgroundColor: ["#FF0000", "#FFF"],
+    },
+  ],
+};
+
 const states = ["All", "All", "All", "All"];
 
 const canvas = document.getElementById("donutChart");
@@ -157,12 +168,13 @@ const diffSelector = document.querySelector(".difficultySelector");
 const companiesSelector = document.querySelector(".companiesSelector");
 const companiesList = document.querySelector(".companiesList");
 const resetBtn = document.querySelector(".reset-btn");
+const allTags = document.querySelector(".all-tags");
+const pie = document.querySelector(".pie");
 
 let totalQuestions = questions.length;
 let easyQuestions = findQuestions("Easy");
 let mediumQuestions = findQuestions("Medium");
 let hardQuestions = findQuestions("Hard");
-let solvedQuestions = 0;
 let easySolvedQuestions = 0;
 let mediumSolvedQuestions = 0;
 let hardSolvedQuestions = 0;
@@ -201,17 +213,7 @@ function solvedQuestionPercentage() {
   );
 }
 
-// Data for the donut chart
-const data = {
-  labels: ["Red", "White"],
-  datasets: [
-    {
-      data: [0, 100], // Percentages or values
-      backgroundColor: ["#FF0000", "#FFF"],
-    },
-  ],
-};
-
+// pie chart
 function drawDonutChart(data) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -257,29 +259,19 @@ function drawDonutChart(data) {
   ctx.fill();
 }
 
-// Draw the donut chart
-drawDonutChart(data);
-
+// progress bars
 function updateProgressBar1(percentage) {
   const progressBar = document.getElementById("progressBar1");
   progressBar.style.width = percentage + "%";
-  // progressBar.textContent = percentage + "%";
 }
 function updateProgressBar2(percentage) {
   const progressBar = document.getElementById("progressBar2");
   progressBar.style.width = percentage + "%";
-  // progressBar.textContent = percentage + "%";
 }
 function updateProgressBar3(percentage) {
   const progressBar = document.getElementById("progressBar3");
   progressBar.style.width = percentage + "%";
-  // progressBar.textContent = percentage + "%";
 }
-
-// Example: Update the progress bar to 75%
-updateProgressBar1((easySolvedQuestions / easyQuestions) * 100);
-updateProgressBar2((mediumSolvedQuestions / mediumQuestions) * 100);
-updateProgressBar3((hardSolvedQuestions / hardQuestions) * 100);
 
 // **********************************************
 // Right section [TABLE]
@@ -289,7 +281,7 @@ function spanList(i, arr, n) {
   let list = "";
   let j = 0;
   while (j < n) {
-    list += `<span class="inline-block px-1">[${arr[j]}]</span>`;
+    list += `<span class="inline-block px-2 rounded  m-1 bg-[#64748b] text-white">${arr[j]}</span>`;
     j++;
   }
   return list;
@@ -347,11 +339,6 @@ function showingQuestions([checked, tgs, diff, com]) {
   });
 }
 
-// compulsory functions
-showingQuestions(states);
-addCopanies();
-addTags();
-
 function addCopanies() {
   const companiesList = findDistinctCompanies();
 
@@ -377,6 +364,65 @@ function addTags() {
     );
   });
 }
+
+// *******************************
+// displaying all the tags on left box
+
+function displayAllTags() {
+  const list = findDistinctTags();
+  list.forEach((tag) => {
+    allTags.insertAdjacentHTML(
+      "beforeend",
+      `<div class="px-2 rounded  m-1 bg-[#64748b] " >${tag}</div>`
+    );
+  });
+}
+
+// *********************
+// RESET BUTTON
+
+function resetValues() {
+  tagsSelector.value = "All";
+  diffSelector.value = "All";
+  companiesSelector.value = "All";
+  checkboxSelector.value = "All";
+  questions.forEach((que) => {
+    que.solved = false;
+  });
+  states[0] = "All";
+  states[1] = "All";
+  states[2] = "All";
+  states[3] = "All";
+  (easySolvedQuestions = 0),
+    (mediumSolvedQuestions = 0),
+    (hardSolvedQuestions = 0);
+  companiesList.innerHTML = "";
+  showingQuestions(states);
+  updateProgressBar1((easySolvedQuestions / easyQuestions) * 100);
+  updateProgressBar2((mediumSolvedQuestions / mediumQuestions) * 100);
+  updateProgressBar3((hardSolvedQuestions / hardQuestions) * 100);
+  data.datasets[0].data[0] = solvedQuestionPercentage();
+  data.datasets[0].data[1] = 100 - solvedQuestionPercentage();
+  drawDonutChart(data);
+  let per = `${
+    easySolvedQuestions + mediumSolvedQuestions + hardSolvedQuestions
+  }/${totalQuestions}`;
+  pie.style.setProperty("--after-content", `'${per}'`);
+}
+
+// compulsory function calls
+showingQuestions(states);
+addCopanies();
+addTags();
+displayAllTags();
+drawDonutChart(data);
+pie.classList.add(`after:text-xl`);
+pie.classList.add(`after:absolute`);
+pie.classList.add(`after:top-1/2`);
+pie.classList.add(`after:left-1/2`);
+pie.classList.add(`after:-translate-x-1/2`);
+pie.classList.add(`after:-translate-y-1/2`);
+pie.style.setProperty("--after-content", `'0/${totalQuestions}'`);
 
 checkboxSelector.addEventListener("change", function () {
   companiesList.innerHTML = "";
@@ -417,7 +463,7 @@ companiesList.addEventListener("click", (e) => {
         mediumSolvedQuestions++;
       else hardSolvedQuestions++;
     }
-    // console.log();
+
     questions[index - 1].solved = !questions[index - 1].solved;
     updateProgressBar1((easySolvedQuestions / easyQuestions) * 100);
     updateProgressBar2((mediumSolvedQuestions / mediumQuestions) * 100);
@@ -425,31 +471,13 @@ companiesList.addEventListener("click", (e) => {
     data.datasets[0].data[0] = solvedQuestionPercentage();
     data.datasets[0].data[1] = 100 - solvedQuestionPercentage();
     drawDonutChart(data);
+
+    let per = `${
+      easySolvedQuestions + mediumSolvedQuestions + hardSolvedQuestions
+    }/${totalQuestions}`;
+    console.log(per);
+    pie.style.setProperty("--after-content", `'${per}'`);
   }
 });
-
-// *********************
-// RESET BUTTON
-
-function resetValues() {
-  questions.forEach((que) => {
-    que.solved = false;
-  });
-  states[0] = "All";
-  states[1] = "All";
-  states[2] = "All";
-  states[2] = "All";
-  (easySolvedQuestions = 0),
-    (mediumSolvedQuestions = 0),
-    (hardSolvedQuestions = 0);
-  companiesList.innerHTML = "";
-  showingQuestions(states);
-  updateProgressBar1((easySolvedQuestions / easyQuestions) * 100);
-  updateProgressBar2((mediumSolvedQuestions / mediumQuestions) * 100);
-  updateProgressBar3((hardSolvedQuestions / hardQuestions) * 100);
-  data.datasets[0].data[0] = solvedQuestionPercentage();
-  data.datasets[0].data[1] = 100 - solvedQuestionPercentage();
-  drawDonutChart(data);
-}
 
 resetBtn.addEventListener("click", resetValues);

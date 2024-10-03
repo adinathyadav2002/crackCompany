@@ -4,53 +4,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Company Wise &mdash; Problems</title>
   <!-- meta tags -->
+  <meta name="description" content="This it website where you can find company wise questions to solve." />
 
   <!-- favicon -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
   <!-- css files -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="global.css" />
 </head>
 
-<body class="box-border">
+
+<body class="box-border ">
   <!-- header -->
-  <header class="h-16 bg-slate-500 w-full box-border shrink-0">
-    <ul class="flex items-center h-full px-3 w-11/12 mx-auto">
+  <header class="h-16 bg-slate-500 w-full box-border shrink-0 absolute z-10">
+    <ul class="flex items-center h-full  w-11/12 mx-auto">
       <li>
-        <a href="#" class="text-lg font-bold text-white">Home</a>
+        <a href="index.html" class="text-lg font-bold text-white flex gap-2"> <img src="home.svg" alt="home logo"
+            class="h-7 w-8 text-white"></a>
       </li>
       <li class="flex ml-auto">
-        <a href="#" class="text-lg font-semibold text-white">Github</a>
+        <a href="" class="text-lg font-semibold text-white flex gap-2">
+          <img src="github.svg" alt="github logo" class="h-7 w-8"></a>
       </li>
     </ul>
   </header>
 
   <footer class="flex w-11/12 mx-auto grow">
     <!-- left section -->
-    <section class="w-3/12 bg-slate-300 h-screen sticky top-0 left-0  pt-11">
-      <!-- i have to use pseudo element after and create 
-         completion functionality -->
+    <section class="w-3/12 bg-slate-300 h-screen sticky top-0 left-0  pt-[100px]">
 
-      <div class="flex gap-4 flex-col items-center">
+      <div class="flex gap-4 justify-center">
         <div class="h-40 w-40 rounded-lg overflow-hidden">
-          <img src="face-img.jpg" class="h-full w-full" alt="user profile img" />
+          <img src="face-img.JPG" class="h-full w-full" alt="user profile img" />
         </div>
-        <p class="font-bold text-[#555] text-lg">user_name</p>
-        <div class="py-3 w-4/12 h-">
-          <button type="button" class="bg-red-600 px-3 rounded-md block mx-auto reset-btn">
+        <div class="py-3 w-4/12 flex flex-col justify-center gap-0">
+          <p class="text-xl font-bold">👋🏻 Hello,</p>
+          <p class="font-bold text-[#555] text-lg">AdinathYadav</p>
+          <button type="button" class="bg-red-600 px-3 rounded-md block reset-btn mt-auto w-20 ">
             Reset
           </button>
         </div>
       </div>
 
-      <div class="flex justify-around mt-6">
-        <div class="w-4/12">
+      <div class="flex justify-around mt-6 ">
+        <div class="pie relative">
           <canvas id="donutChart" class="mx-auto" width="100" height="100"></canvas>
         </div>
         <div class="w-7/12 flex flex-col gap-3 justify-center">
-          <div class="flex items-center">
-            <!-- <span class="text-[10px] w-11 inline-block pr-5">Easy: </span> -->
+          <div class="flex flex-col">
+            <span class="text-[10px] w-11 inline-block pr-5 font-semibold">Easy: </span>
             <div class="progress-container rounded-md bg-slate-50 overflow-hidden h-3 w-full">
               <div
                 class="progress-bar text-[8px] h-full w-0 bg-[#4caf50] text-center text-white font-bold transition: width 0.5s ease-in-out;"
@@ -59,8 +64,8 @@
             </div>
           </div>
 
-          <div class="flex items-center">
-            <!-- <span class="text-[10px] w-11 inline-block pr-5">Medium: </span> -->
+          <div class="flex flex-col">
+            <span class="text-[10px] w-11 inline-block pr-5 font-semibold">Medium: </span>
             <div class="progress-container rounded-md bg-slate-50 overflow-hidden h-3 w-full">
               <div
                 class="progress-bar text-[8px] h-full w-0 bg-[#0000FF] text-center text-white font-bold transition: width 0.5s ease-in-out;"
@@ -69,8 +74,8 @@
             </div>
           </div>
 
-          <div class="flex items-center">
-            <!-- <span class="text-[10px] w-11 inline-block pr-5">Hard: </span> -->
+          <div class="flex flex-col">
+            <span class="text-[10px] w-11 inline-block pr-5 font-semibold">Hard: </span>
             <div class="progress-container rounded-md bg-slate-50 overflow-hidden h-3 w-full">
               <div
                 class="progress-bar text-[8px] h-full w-0 bg-[#FF0000] text-center text-white font-bold transition: width 0.5s ease-in-out;"
@@ -81,64 +86,71 @@
         </div>
       </div>
 
-      <div class="py-3 w-4/12 relative">
-        <h3 class="w-full text-center">
-        </h3>
+      <div class="w-full all-tags pt-6 px-4 flex flex-wrap  text-white">
+
       </div>
     </section>
 
     <!-- right section -->
-    <section class="w-9/12 h-screen overflow-y-auto">
+    <section class="w-9/12 h-screen overflow-y-auto pt-[65px]">
       <table class="w-full border-separate border-spacing-y-4 questions-table">
-        <thead class="h-16">
-          <tr class="even:bg-gray-100 h-full">
-            <th class="w-1/12 text-left h-18 pl-2 flex">
-              <div class="mt-6">
-                <select name="checkbox" class="checkboxSelector bg-transparent rounded border-2 border-gray-300 h-8 
+        <thead class="h-[70px] pb-4">
+          <tr class="even:bg-gray-100 h-full sticky top-0 bg-white">
+            <th class="w-1/12 pl-2 flex h-[70px]">
+              <select name="checkbox" class="checkboxSelector bg-transparent rounded border-2 border-gray-300 h-7 mt-auto
                 ">
+                <option value="All">All</option>
+                <option value="Unsolved">Unchecked</option>
+                <option value="Solved">Checked</option>
+              </select>
+            </th>
+            <th class="w-2/12">
+              <span class="flex h-[70px] flex-col-reverse">
+                Question Name
+              </span>
+            </th>
+            <th class="w-1/12">
+              <span class="flex h-[70px] flex-col-reverse">
+                Solution
+              </span>
+            </th>
+            <th class="w-3/12">
+              <span class="flex h-[70px] flex-col">
+                <label for="tags" class="mt-auto">Tags:</label>
+                <select name="tags" class="tagsSelector bg-transparent rounded border-2 border-gray-300 h-7 ">
                   <option value="All">All</option>
-                  <option value="Unsolved">Unchecked</option>
-                  <option value="Solved">Checked</option>
                 </select>
-              </div>
+              </span>
             </th>
-            <th class="w-2/12 h-18">Question Name</th>
-            <th class="w-1/12 h-18 ">Solution</th>
-            <th class="w-3/12 h-18">
-              <label for="tags">Tags:</label>
-              <select name="tags" class="tagsSelector bg-transparent rounded border-2 border-gray-300 h-8 ">
-                <option value="All">All</option>
-              </select>
-            </th>
-            <th class="w-1/12 h-18 ">
-              <label for="difficulty">Difficulty:</label>
-              <select name="difficulty"
-                class=" difficultySelector bg-transparent  rounded border-2 border-gray-300 h-8">
-                <option value="All">All</option>
-                <option value="Easy">Easy</option>
-                <option value="Medium">Medium</option>
-                <option value="Hard">Hard</option>
-              </select>
+            <th class="w-1/12">
+              <span class="flex h-[70px] flex-col">
+                <label for="difficulty" class="mt-auto">Difficulty:</label>
+                <select name="difficulty"
+                  class=" difficultySelector bg-transparent  rounded border-2 border-gray-300 h-7">
+                  <option value="All">All</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Hard">Hard</option>
+                </select>
+              </span>
             </th>
             <th class="w-4/12 h-18">
-
-              <label for="companies">Companies:</label>
-              <select name="companies" class="companiesSelector bg-transparent rounded border-2 border-gray-300 h-8">
-                <option value="All">All</option>
-
-              </select>
-
+              <span class="flex h-[70px] flex-col">
+                <label for="companies" class="mt-auto">Companies:</label>
+                <select name="companies" class="companiesSelector bg-transparent rounded border-2 border-gray-300 h-7">
+                  <option value="All">All</option>
+                </select>
+              </span>
             </th>
           </tr>
         </thead>
         <tbody class="companiesList">
           <!-- sample to include some css -->
-          <div class="h-6 w-6 px-1 hidden">
           </div>
-          <div class="w-6 h-20 px-2 hidden">
+          <div class="w-6 h-20 px-2 hidden after:top-1/2 after:left-1/2 after:-translate-x-1/2 
+            after:-translate-y-1/2 after:text-xl after:absolute py-1 m-1 bg-[#64748b] after:content-['5/15']">
           </div>
         </tbody>
-
       </table>
     </section>
   </footer>
