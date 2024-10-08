@@ -321,7 +321,7 @@ function showingQuestions([checked, tgs, diff, com]) {
         <td class="h-9">${que.name}</td>
           <td class="h-9">
             <a href=${que.solution} target="_blank">
-              <img src="visit.svg" class="h-6 w-6 mx-auto"/>
+              <img src="./icons/visit.svg" class="h-6 w-6 mx-auto"/>
             </a>
           </td>
           <td class="h-9">
